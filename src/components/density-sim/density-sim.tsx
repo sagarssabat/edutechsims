@@ -1,4 +1,4 @@
-import { Component, h, State } from '@stencil/core';
+import { Component, h, State, Watch } from '@stencil/core';
 import { TimelineMax } from 'gsap';
 
 @Component({
@@ -14,14 +14,31 @@ export class MyComponent {
   @State() densityOfSolid: string = "0.7";
   @State() volumeOfSphere: string = "40";
 
+  @State() customLiquid: string = "1.0"
+  @State() customSolid: string = "0.7"
+
   calculateVolumeOfSphere(ds: number, vs: number, dl: number) {
     return (ds * vs) / dl;
   }
 
+  @Watch('densityOfLiquid')
+  onDensityOfLiquidChange(newVal) {
+    if (newVal != "-1") this.customLiquid = newVal
+  }
+
+  @Watch('densityOfSolid')
+  onDensityOfSolidChange(newVal) {
+    if (newVal != "-1") this.customSolid = newVal
+  }
+
+  @Watch('densityOfLiquid')
+  @Watch('densityOfSolid')
+  @Watch('volumeOfSphere')
+  @Watch('customLiquid')
+  @Watch('customSolid')
   onSubmit() {
-    debugger
-    let densityOfLiquid = parseFloat(this.densityOfLiquid);
-    let densityOfSolid = parseFloat(this.densityOfSolid);
+    let densityOfLiquid = parseFloat(this.densityOfLiquid === "-1" ? this.customLiquid : this.densityOfLiquid);
+    let densityOfSolid = parseFloat(this.densityOfSolid === "-1" ? this.customSolid : this.densityOfSolid);
     let volumeOfSphere = parseFloat(this.volumeOfSphere);
 
     let ans = this.calculateVolumeOfSphere(densityOfSolid, volumeOfSphere, densityOfLiquid);
@@ -35,8 +52,8 @@ export class MyComponent {
     }
 
     const t1 = new TimelineMax();
-    t1.to(this.ballRef, { y: dropHeight, duration: 2 });
-    t1.to(this.smallBeaker, { y: -(ans > volumeOfSphere ? 100 : ans) }, 1);
+    t1.to(this.ballRef, { y: dropHeight, duration: 2, ease: "sine.in" });
+    t1.to(this.smallBeaker, { duration: 2, y: -(ans > volumeOfSphere ? 100 : ans), ease: "slow.in" }, 1.5);
   }
 
   render() {
@@ -47,7 +64,7 @@ export class MyComponent {
             <label htmlFor="selectLiquid">select liquid</label>
             <select class="form-control"
               onInput={e => this.densityOfLiquid = (e.target as HTMLInputElement).value}>
-              <option value="1.0"> (1.0)</option>
+              <option value="1.0">Water (1.0)</option>
               <option value="1.1">Glycol (1.1)</option>
               <option value="0.8">Acetone (0.8)</option>
               <option value="13.6">Mercury (13.6)</option>
@@ -56,11 +73,11 @@ export class MyComponent {
           </div>
           <div class="form-group">
             <label htmlFor="">Density</label>
-            <input 
+            <input
               type="number"
               class="form-control"
-              value={this.densityOfLiquid}
-              onInput={e => this.densityOfLiquid = (e.target as HTMLInputElement).value}
+              value={this.customLiquid}
+              onInput={e => this.customLiquid = (e.target as HTMLInputElement).value}
               disabled={this.densityOfLiquid != "-1"} /> g/cm <sup>3</sup>
           </div>
         </div>
@@ -78,11 +95,11 @@ export class MyComponent {
           </div>
           <div class="form-group">
             <label htmlFor="">Density</label>
-            <input 
+            <input
               type="number"
               class="form-control"
-              value={this.densityOfSolid}
-              onInput={e => this.densityOfSolid = (e.target as HTMLInputElement).value}
+              value={this.customSolid}
+              onInput={e => this.customSolid = (e.target as HTMLInputElement).value}
               disabled={this.densityOfSolid != "-1"} /> g/cm <sup>3</sup>
           </div>
         </div>
@@ -91,7 +108,9 @@ export class MyComponent {
           <input type="number" name="" id="volume" value="40" min="40" max="100" onInput={e => this.volumeOfSphere = (e.target as HTMLInputElement).value} />
         </div>
         <button type="button" class="btn-primary" onClick={() => this.onSubmit()}>submit</button>
-        <div>
+        <button type="button" class="btn-primary">refresh</button>
+        <div class="svg-frame">
+          <div class="water-displaced"><span>123</span></div>
           <svg xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1200 1200">
             <defs>
@@ -514,11 +533,6 @@ export class MyComponent {
             </defs>
             <g class="cls-27">
               <g id="Layer_0" data-name="Layer 0">
-                <g id="Layer_8" data-name="Layer 8">
-                  <g class="cls-28">
-                    <rect class="cls-29" x="313.43" y="733" width="327.57" height="431.38" />
-                  </g>
-                </g>
                 <g id="Layer_7" data-name="Layer 7">
                   <g class="cls-30">
                     <rect ref={el => this.smallBeaker = el as SVGElement} class="cls-31" x="702.58" y="947" width="168.29" height="120.03" />
@@ -643,6 +657,11 @@ export class MyComponent {
                 </g>
                 <g id="Layer_1" data-name="Layer 1">
                   <rect class="cls-77" y="215.44" width="1200" height="8.69" />
+                </g>
+                <g id="Layer_8" data-name="Layer 8">
+                  <g class="cls-28">
+                    <rect class="cls-29" x="313.43" y="733" width="327.57" height="431.38" />
+                  </g>
                 </g>
               </g>
             </g>

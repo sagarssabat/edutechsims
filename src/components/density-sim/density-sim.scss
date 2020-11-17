@@ -415,3 +415,15 @@
 .cls-86 {
     filter: url(#luminosity-noclip);
 }
+
+.svg-frame{
+  position: relative;
+
+  .water-displaced{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+}
