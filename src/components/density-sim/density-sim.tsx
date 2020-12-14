@@ -746,6 +746,7 @@ export class MyComponent {
                 </g>
               </svg>
             </div>
+            <p class="text-center">Water displaced value: <span>{ (parseFloat(this.volumeOfSphere) * parseFloat(this.densityOfSolid)).toFixed(2) }</span></p>
           </div>
         </div>
       </form>
