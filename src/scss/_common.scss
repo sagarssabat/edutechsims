@@ -6,3 +6,16 @@
 .mx-auto{
     margin: 0 auto;
 }
+
+.svg-frame{
+  position: relative;
+}
+
+.water-displaced{
+  color: #ff0000;
+  bottom: 10%;
+  right: 30%;
+  font-size: 46%;
+  line-height: 1;
+  position: absolute;
+}

@@ -3,6 +3,7 @@ import { sass } from '@stencil/sass';
 
 export const config: Config = {
   namespace: 'edutech',
+  globalStyle: 'src/scss/main.scss',
   outputTargets: [
     {
       type: 'dist',

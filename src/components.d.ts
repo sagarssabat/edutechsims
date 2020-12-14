@@ -7,6 +7,20 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface DensitySim {
+        "customLiquidColor": string;
+        "customSolidColor": string;
+        "defaultSelectedLiquid": string;
+        "defaultSelectedSolid": string;
+        "densityOfLiquidOptions": string;
+        "densityOfSolidOptions": string;
+    }
+    interface DensitySim1 {
+        "customLiquidColor": string;
+        "customSolidColor": string;
+        "defaultSelectedLiquid": string;
+        "defaultSelectedSolid": string;
+        "densityOfLiquidOptions": string;
+        "densityOfSolidOptions": string;
     }
     interface MyComponent {
         /**
@@ -30,6 +44,12 @@ declare global {
         prototype: HTMLDensitySimElement;
         new (): HTMLDensitySimElement;
     };
+    interface HTMLDensitySim1Element extends Components.DensitySim1, HTMLStencilElement {
+    }
+    var HTMLDensitySim1Element: {
+        prototype: HTMLDensitySim1Element;
+        new (): HTMLDensitySim1Element;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
@@ -38,11 +58,26 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "density-sim": HTMLDensitySimElement;
+        "density-sim1": HTMLDensitySim1Element;
         "my-component": HTMLMyComponentElement;
     }
 }
 declare namespace LocalJSX {
     interface DensitySim {
+        "customLiquidColor"?: string;
+        "customSolidColor"?: string;
+        "defaultSelectedLiquid"?: string;
+        "defaultSelectedSolid"?: string;
+        "densityOfLiquidOptions"?: string;
+        "densityOfSolidOptions"?: string;
+    }
+    interface DensitySim1 {
+        "customLiquidColor"?: string;
+        "customSolidColor"?: string;
+        "defaultSelectedLiquid"?: string;
+        "defaultSelectedSolid"?: string;
+        "densityOfLiquidOptions"?: string;
+        "densityOfSolidOptions"?: string;
     }
     interface MyComponent {
         /**
@@ -60,6 +95,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "density-sim": DensitySim;
+        "density-sim1": DensitySim1;
         "my-component": MyComponent;
     }
 }
@@ -68,6 +104,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "density-sim": LocalJSX.DensitySim & JSXBase.HTMLAttributes<HTMLDensitySimElement>;
+            "density-sim1": LocalJSX.DensitySim1 & JSXBase.HTMLAttributes<HTMLDensitySim1Element>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
         }
     }

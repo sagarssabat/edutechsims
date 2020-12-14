@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
-    <title>Stencil Component Starter</title>
 
-    <script type="module" src="/build/edutech.esm.js"></script>
-    <script nomodule src="/build/edutech.js"></script>
-  </head>
-  <body>
-    <density-sim first="Stencil" last="'Don't call me a framework' JS"></density-sim>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+  <title>Stencil Component Starter</title>
+
+  <script type="module" src="/build/edutech.esm.js"></script>
+  <script nomodule src="/build/edutech.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="/build/main.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <density-sim
+      density-of-liquid-options='[{"label":"water","value":"1.0","color":"#0000ff"},{"label":"Glycol","value":"1.1","color":"lightgreen"},{"label":"Acetone","value":"0.8","color":"lightorange"},{"label":"Mercury","value":"13.6","color":"#cccccc"}]'
+      density-of-solid-options='[{"label":"Birchwood","value":"0.7","color":"yellow"},{"label":"Aluminium","value":"2.7","color":"#808080"},{"label":"Copper","value":"9.0","color":"lightorange"},{"label":"Silver","value":"10.5","color":"lightblue"},{"label":"Lead","value":"11.3","color":"#c8c8c8"}]'
+      default-selected-liquid="1.0" default-selected-solid="0.7" custom-liquid-color="lightblue"
+      custom-solid-color="lightgreen"></density-sim>
+  </div>
+</body>
+
 </html>
