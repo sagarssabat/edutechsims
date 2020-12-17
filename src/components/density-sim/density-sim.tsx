@@ -86,7 +86,7 @@ export class MyComponent {
             <div class="form-wrap">
               <div class="form-group">
                 <label htmlFor="selectLiquid">select liquid</label>
-                <select class="form-control col-md-9"
+                <select class="form-control"
                   onInput={e => this.densityOfLiquid = (e.target as HTMLInputElement).value}>
                   {
                     densityOfLiquidOptions.map(({ value, label }) => (
